@@ -40,3 +40,10 @@
     font-weight: bold;
     margin-right: 5px;
 }
+
+.singleSpeakers .avatar img{
+    position: initial; 
+}
+.singleSpeakers .names{
+    margin-left: 20px;
+}

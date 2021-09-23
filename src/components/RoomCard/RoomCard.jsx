@@ -1,10 +1,16 @@
 import React from "react"
 import styles from "./RoomCard.module.css"
+import {useHistory} from "react-router-dom";
 const RoomCard = ({ room }) => {
+  const history=useHistory();
   return (
-    <div className={styles.card}>
+    <div onClick={()=>{history.push(`/room/${room.id}`)}} className={styles.card}>
       <h3 className={styles.topic}>{room.topic}</h3>
-      <div className={styles.speakers}>
+      <div
+        className={`${styles.speakers} ${
+          room.speakers.length === 1 ? styles.singleSpeakers : ""
+        }`}
+      >
         <div className={styles.avatar}>
           {room.speakers.map(speakers => (
             <img key={speakers.id} src={speakers.avatar} alt="speaker" />

@@ -1,164 +1,19 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import AddRoomModel from "../../components/AddRoomModel/AddRoomModel"
 import RoomCard from "../../components/RoomCard/RoomCard"
 import styles from "./Rooms.module.css"
-const rooms = [
-  {
-    id: 1,
-    topic: "which framework best for frontend 1 ?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 2,
-    topic: "which database best for backend 2?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 3,
-    topic: "which framework best for frontend 3 ?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 4,
-    topic: "which framework best for frontend 4?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 5,
-    topic: "which framework best for frontend 5?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 6,
-    topic: "which framework best for frontend 6?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 7,
-    topic: "which framework best for frontend 7?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 8,
-    topic: "which framework best for frontend 8?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-  {
-    id: 9,
-    topic: "which framework best for frontend 9?",
-    speakers: [
-      {
-        id: 1,
-        name: "john doe",
-        avatar: "/images/monkey-avatar.png",
-      },
-      {
-        id: 2,
-        name: "ashish k",
-        avatar: "/images/monkey-avatar.png",
-      },
-    ],
-    totalPeople: 40,
-  },
-]
+import { getAllRooms } from "../../http"
+// const rooms = []
 const Rooms = () => {
   const [showModel, setShowModel] = useState(false);
+  const [rooms, setRooms] = useState([])
+  useEffect(() => {
+    const fetchRooms=async ()=>{
+      const {data}=await getAllRooms();
+      setRooms(data);
+    }
+    fetchRooms();
+  }, [])
   function openModel(){
     setShowModel(true);
   }
@@ -186,7 +41,7 @@ const Rooms = () => {
           ))}
         </div>
       </div>
-      {showModel && <AddRoomModel />}
+      {showModel && <AddRoomModel onClose={()=>{setShowModel(false)}}/>}
     </>
   )
 }
